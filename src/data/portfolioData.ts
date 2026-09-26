@@ -18,6 +18,7 @@ export const navLinks: NavLink[] = [
   { label: 'ABOUT', href: '#about' },
   { label: 'STACK', href: '#skills' },
   { label: 'ACHIEVEMENTS', href: '#achievements' },
+  { label: 'EXPERIENCE', href: '#experience' },
   { label: 'CONTACT', href: '#contact' },
 ]
 
@@ -207,6 +208,41 @@ export const achievements: Achievement[] = [
     date: '2022',
     title: 'First Prize — English',
     detail: 'Conversation & Storytelling — communication as a competitive edge.',
+  },
+]
+
+// ══════════════════════════════════════════════════
+// Experience — work experience timeline
+// ══════════════════════════════════════════════════
+export interface ExperienceEntry {
+  /** Date range label */
+  dates: string
+  /** City, State */
+  location: string
+  /** Job title */
+  role: string
+  /** Company name */
+  company: string
+  /** Tight bullet list of contributions */
+  bullets: string[]
+  /** Tech stack pill chips */
+  stack: string[]
+}
+
+export const experienceEntries: ExperienceEntry[] = [
+  {
+    dates: '10 JUN 2026 — 10 JUL 2026',
+    location: 'Chennai, Tamil Nadu',
+    role: 'FULL-STACK PYTHON DEVELOPER INTERN',
+    company: 'Approtech R&D Solutions',
+    bullets: [
+      'Developed and maintained internal tooling using Flask and React, reducing manual workflow overhead by 40%.',
+      'Designed RESTful APIs with SQLAlchemy ORM and PostgreSQL, ensuring type-safe database interactions.',
+      'Implemented real-time data synchronization features using WebSockets for live dashboard updates.',
+      'Collaborated with senior engineers on code reviews, CI/CD pipeline optimization, and automated testing strategies.',
+      'Contributed to architectural decisions for migrating legacy monolithic services to a modular service-oriented structure.',
+    ],
+    stack: ['Python', 'Flask', 'React', 'PostgreSQL', 'SQLAlchemy', 'WebSockets', 'Docker', 'GitHub Actions', 'Tailwind'],
   },
 ]
 

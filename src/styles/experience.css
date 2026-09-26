@@ -1,0 +1,221 @@
+/* ══════════════════════════════════════════════════
+   EXPERIENCE SECTION — Vertical Timeline
+   Structurally matched to Achievements so both
+   sections feel like a cohesive pair.
+   ══════════════════════════════════════════════════ */
+
+.experience {
+  position: relative;
+  padding: var(--spacing-section) clamp(2rem, 4vw, 4rem);
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+/* ── Top hairline ── */
+.experience::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(2rem, 4vw, 4rem);
+  right: clamp(2rem, 4vw, 4rem);
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Section header ── */
+.experience__header {
+  max-width: 1200px;
+  margin: 0 auto clamp(3rem, 6vw, 6rem);
+}
+
+.experience__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  margin-bottom: 1rem;
+  will-change: transform, opacity;
+}
+
+.experience__headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-section-sm);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ivory);
+  will-change: transform, opacity;
+}
+
+.experience__headline-dot {
+  color: var(--color-accent);
+}
+
+/* ── Timeline container ── */
+.experience__timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: clamp(3rem, 5vw, 5rem);
+}
+
+/* ── Vertical connector line ── */
+.experience__timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+/* ── Individual timeline entry ── */
+.experience__entry {
+  position: relative;
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  will-change: transform, opacity;
+}
+
+.experience__entry:last-child {
+  padding-bottom: 0;
+}
+
+/* ── Dot on the timeline line ── */
+.experience__dot {
+  position: absolute;
+  left: calc(-1 * clamp(3rem, 5vw, 5rem));
+  top: 0.35em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 0 0 0 4px var(--color-accent-dim);
+  z-index: 2;
+  transform: translateX(-3px);
+}
+
+/* ── Meta: date + location (small tracked text near the dot) ── */
+.experience__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.experience__date {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.experience__location {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-stone-dark);
+}
+
+/* ── Role + Company (headline scale) ── */
+.experience__role {
+  margin-bottom: 1.2rem;
+  will-change: transform, opacity;
+}
+
+.experience__role-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--color-ivory);
+  margin-bottom: 0.25rem;
+}
+
+.experience__company {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 300;
+  color: var(--color-accent);
+  letter-spacing: 0.01em;
+}
+
+/* ── Bullet list ── */
+.experience__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4rem;
+  max-width: 580px;
+  will-change: transform, opacity;
+}
+
+.experience__bullet {
+  position: relative;
+  padding-left: 1.2em;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: var(--color-stone-light);
+  margin-bottom: 0.45rem;
+}
+
+.experience__bullet:last-child {
+  margin-bottom: 0;
+}
+
+/* Subtle dash marker */
+.experience__bullet::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-stone-dark);
+  font-size: 0.8em;
+}
+
+/* ── Stack pill chips ── */
+.experience__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  will-change: transform, opacity;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .experience {
+    padding: var(--spacing-section) 1.5rem;
+  }
+
+  .experience__timeline {
+    padding-left: 2rem;
+  }
+
+  .experience__dot {
+    left: -2rem;
+  }
+
+  .experience__role-title {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+  }
+
+  .experience__company {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  }
+
+  .experience__meta {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}

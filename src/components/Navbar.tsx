@@ -60,7 +60,7 @@ export function Navbar() {
 
   // ── Active Section Spy (IntersectionObserver) ──
   useEffect(() => {
-    const sectionIds = ['projects', 'about', 'skills', 'achievements', 'contact']
+    const sectionIds = ['projects', 'about', 'skills', 'achievements', 'experience', 'contact']
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[]
