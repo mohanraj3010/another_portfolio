@@ -1,0 +1,170 @@
+/* ══════════════════════════════════════════════════
+   SKILLS SECTION — Typographic Scatter System
+   ══════════════════════════════════════════════════ */
+
+.skills {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--spacing-section) 0;
+  background: var(--color-void);
+  overflow: hidden;
+}
+
+/* ── Top hairline ── */
+.skills::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(2rem, 4vw, 4rem);
+  right: clamp(2rem, 4vw, 4rem);
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Section eyebrow ── */
+.skills__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  padding: 0 clamp(2rem, 4vw, 4rem);
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+  will-change: transform, opacity;
+}
+
+/* ── Scatter container ── */
+.skills__scatter {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  /* No padding — words are positioned absolutely within */
+}
+
+/* ── Individual skill word ── */
+.skills__word {
+  position: absolute;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  will-change: transform, opacity;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+.skills__word:hover {
+  color: var(--color-accent);
+}
+
+/* ── Size tiers for visual hierarchy ── */
+.skills__word--xl {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--color-ivory);
+}
+
+.skills__word--lg {
+  font-size: clamp(2rem, 4.5vw, 4.5rem);
+  font-weight: 600;
+  line-height: 0.9;
+  color: var(--color-cream);
+}
+
+.skills__word--md {
+  font-size: clamp(1.3rem, 2.8vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-sand);
+}
+
+.skills__word--sm {
+  font-size: clamp(0.9rem, 1.6vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-stone-light);
+  letter-spacing: 0.04em;
+}
+
+/* ── Outlined / stroke style for some words ── */
+.skills__word--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-cream);
+}
+
+.skills__word--outline:hover {
+  color: var(--color-accent);
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+/* ── Decorative hairlines in the scatter field ── */
+.skills__hairline {
+  position: absolute;
+  background: var(--color-border);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.skills__hairline--h {
+  height: 1px;
+  width: 30vw;
+}
+
+.skills__hairline--v {
+  width: 1px;
+  height: 25vh;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .skills__scatter {
+    min-height: 60vh;
+  }
+
+  .skills__word--xl {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .skills__word--lg {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .skills {
+    min-height: auto;
+    padding: var(--spacing-section) 0;
+  }
+
+  .skills__scatter {
+    min-height: 50vh;
+  }
+
+  .skills__word--xl {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+
+  .skills__word--lg {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+  }
+
+  .skills__word--md {
+    font-size: clamp(1.1rem, 5vw, 1.8rem);
+  }
+
+  .skills__word--sm {
+    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+  }
+
+  .skills__word--outline {
+    -webkit-text-stroke-width: 1px;
+  }
+}

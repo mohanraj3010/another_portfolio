@@ -1,0 +1,135 @@
+/* ══════════════════════════════════════════════════
+   EDUCATION SECTION — Calm Editorial Timeline
+   Thin hairlines, generous spacing, no scroll-jacking.
+   ══════════════════════════════════════════════════ */
+
+.education {
+  position: relative;
+  padding: var(--spacing-section) clamp(2rem, 4vw, 4rem);
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+/* ── Top hairline ── */
+.education::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(2rem, 4vw, 4rem);
+  right: clamp(2rem, 4vw, 4rem);
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Inner container ── */
+.education__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Section eyebrow ── */
+.education__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  will-change: transform, opacity;
+}
+
+/* ── Individual education entry ── */
+.education__entry {
+  display: grid;
+  grid-template-columns: clamp(5rem, 10vw, 9rem) 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: baseline;
+  padding: clamp(2rem, 3.5vw, 3rem) 0;
+  border-top: 1px solid var(--color-border);
+  will-change: transform, opacity;
+}
+
+.education__entry:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Date / label column ── */
+.education__label {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-ivory);
+}
+
+/* Non-accent label (e.g. "Before That") — smaller, quieter */
+.education__entry:not(.education__entry--accent) .education__label {
+  font-size: clamp(0.7rem, 0.85vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  line-height: 1.3;
+}
+
+/* ── Content column ── */
+.education__degree {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-cream);
+  margin-bottom: 0.35rem;
+}
+
+.education__institution {
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--color-stone-light);
+  margin-bottom: 0.25rem;
+}
+
+.education__detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-chip);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: 0.5rem;
+}
+
+/* Accent dot before the detail */
+.education__detail::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .education {
+    padding: var(--spacing-section) 1.5rem;
+  }
+
+  .education__entry {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .education__label {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+}

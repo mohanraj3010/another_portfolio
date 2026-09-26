@@ -1,0 +1,263 @@
+/* ══════════════════════════════════════════════════
+   FLOATING EDITORIAL NAVBAR
+   Minimal pill-nav from Phase 2:
+   - Wordmark "DEEPIKA" left
+   - Links (WORK, ABOUT, STACK, ACHIEVEMENTS, CONTACT) center/right in small tracked uppercase
+   - ONE pill CTA button on far right ("RESUME")
+   - Transparent over hero, subtle dark/blurred bar on scroll via single class toggle
+   - Active section link smooth underline slide
+   ══════════════════════════════════════════════════ */
+
+.navbar-wrapper {
+  position: fixed;
+  top: clamp(1rem, 2vw, 1.8rem);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.25rem;
+  pointer-events: none;
+  transition: transform 0.45s var(--ease-out-expo), opacity 0.4s var(--ease-out-expo);
+}
+
+.navbar-wrapper--hidden {
+  transform: translateY(-130%);
+  opacity: 0;
+}
+
+/* ── Centered Glass Pill ── */
+.navbar-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 1.8vw, 2rem);
+  padding: 0.38rem 0.45rem 0.38rem 1.25rem;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-pill);
+  transition:
+    background 0.4s var(--ease-out-expo),
+    backdrop-filter 0.4s var(--ease-out-expo),
+    -webkit-backdrop-filter 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo),
+    box-shadow 0.4s var(--ease-out-expo);
+}
+
+/* Scrolled state: gains subtle dark / blurred bar via single class toggle */
+.navbar-wrapper--scrolled .navbar-pill {
+  background: rgba(14, 14, 14, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 16px 40px -10px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+/* ── Wordmark "DEEPIKA" ── */
+.navbar__brand {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-ivory);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.25s ease;
+  user-select: none;
+}
+
+.navbar__brand:hover {
+  opacity: 0.75;
+}
+
+.navbar__brand-dot {
+  color: var(--color-accent);
+  margin-left: 1px;
+}
+
+/* ── Divider ── */
+.navbar__divider {
+  width: 1px;
+  height: 14px;
+  background: var(--color-border);
+}
+
+/* ── Nav Links Container ── */
+.navbar__links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+/* ── Active Underline Slide ── */
+.navbar__indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 1.5px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  pointer-events: none;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
+  will-change: transform, width, opacity;
+}
+
+/* ── Individual Nav Link (Small tracked uppercase) ── */
+.navbar__link {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-stone-light);
+  text-decoration: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-pill);
+  transition: color 0.25s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.navbar__link:hover {
+  color: var(--color-ivory);
+}
+
+.navbar__link--active {
+  color: var(--color-cream);
+  font-weight: 600;
+}
+
+/* ── Far Right Pill CTA Button (RESUME) ── */
+.navbar__cta {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  background: var(--color-cream);
+  padding: 0.46rem 1.15rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition:
+    background 0.3s var(--ease-out-expo),
+    color 0.3s var(--ease-out-expo),
+    transform 0.3s var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.navbar__cta:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
+  transform: scale(1.03);
+}
+
+/* ── Mobile Hamburger Toggle ── */
+.navbar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-cream);
+  padding: 0.4rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.navbar__toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Mobile Menu Drawer ── */
+.navbar-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-out-expo);
+}
+
+.navbar-mobile-drawer--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.navbar-mobile-drawer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-mobile-drawer__link {
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-stone-light);
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.navbar-mobile-drawer__link:hover,
+.navbar-mobile-drawer__link--active {
+  color: var(--color-ivory);
+  transform: translateY(-2px);
+}
+
+.navbar-mobile-drawer__cta {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  background: var(--color-cream);
+  padding: 0.8rem 2.2rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE (<= 767px)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .navbar__divider,
+  .navbar__links,
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: inline-flex;
+  }
+
+  .navbar-pill {
+    padding: 0.35rem 0.5rem 0.35rem 1rem;
+    gap: 1.5rem;
+  }
+}

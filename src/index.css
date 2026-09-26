@@ -1,0 +1,435 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════
+   DESIGN TOKENS
+   ══════════════════════════════════════════════════ */
+@theme {
+  /* ── Neutrals — warm-tinted charcoal, NEVER pure #000 ── */
+  --color-void: #0c0c0c;
+  --color-ink: #121212;
+  --color-ink-light: #1a1a1a;
+  --color-ink-muted: #252525;
+  --color-ink-subtle: #2e2e2e;
+  --color-stone-dark: #444;
+  --color-stone: #777;
+  --color-stone-light: #999;
+  --color-sand: #b8ada0;
+  --color-cream: #e8e0d6;
+  --color-ivory: #f2ede8;
+  --color-white: #faf8f5;
+
+  /* ── Accent — warm rose-gold / muted coral ── */
+  --color-accent: #c4806a;
+  --color-accent-hover: #d4937e;
+  --color-accent-dim: rgba(196, 128, 106, 0.15);
+  --color-accent-glow: rgba(196, 128, 106, 0.06);
+
+  /* ── Hairline borders ── */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.14);
+
+  /* ── Typography ── */
+  --font-sans: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", "Georgia", serif;
+
+  /* ── Fluid type scale (clamp-based) ── */
+  --text-display: clamp(3.2rem, 9.5vw, 9rem);
+  --text-hero-sub: clamp(1.6rem, 4vw, 3.2rem);
+  --text-section: clamp(2.4rem, 6vw, 5.5rem);
+  --text-section-sm: clamp(1.8rem, 3.5vw, 3rem);
+  --text-body-lg: clamp(1.05rem, 1.4vw, 1.25rem);
+  --text-body: clamp(0.9rem, 1.1vw, 1rem);
+  --text-label: clamp(0.65rem, 0.75vw, 0.75rem);
+  --text-chip: 0.68rem;
+
+  /* ── Spacing ── */
+  --spacing-section: clamp(7rem, 14vw, 16rem);
+  --spacing-block: clamp(3rem, 6vw, 7rem);
+
+  /* ── Easings ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  /* ── Radii ── */
+  --radius-pill: 100px;
+  --radius-card: 6px;
+}
+
+/* ══════════════════════════════════════════════════
+   BASE RESET
+   ══════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis owns scroll */
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════
+   TYPOGRAPHY CLASSES
+   ══════════════════════════════════════════════════ */
+
+/* Oversized display headline — the hero tier */
+.text-display {
+  font-family: var(--font-sans);
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+/* Italic serif accent word inside a display headline */
+.text-display-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-optical-sizing: auto;
+}
+
+/* Section-level headline */
+.text-section {
+  font-family: var(--font-sans);
+  font-size: var(--text-section);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* Smaller section heading */
+.text-section-sm {
+  font-family: var(--font-sans);
+  font-size: var(--text-section-sm);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* Eyebrow / label — geometric sans, ultra-tracked uppercase */
+.text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+/* Body text tiers */
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--color-sand);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--color-stone-light);
+}
+
+/* ══════════════════════════════════════════════════
+   PILL BUTTON — the ONE CTA shape
+   ══════════════════════════════════════════════════ */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--text-chip);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-border-hover);
+  color: var(--color-cream);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 0.35s var(--ease-out-expo),
+    color 0.35s var(--ease-out-expo),
+    border-color 0.35s var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.pill-btn:hover {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  border-color: var(--color-cream);
+}
+
+.pill-btn--filled {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.pill-btn--filled:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-white);
+}
+
+.pill-btn--sm {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.62rem;
+}
+
+/* ══════════════════════════════════════════════════
+   META BADGE / CHIP — the micro-pill pattern
+   Used for: "OPEN TO INTERNSHIPS", "CGPA 8.76",
+   stack tags on projects, etc.
+   ══════════════════════════════════════════════════ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--text-chip);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  color: var(--color-stone-light);
+  background: transparent;
+  white-space: nowrap;
+}
+
+/* Accent-tinted chip (e.g. "OPEN TO INTERNSHIPS") */
+.chip--accent {
+  border-color: rgba(196, 128, 106, 0.3);
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+/* Filled chip (more emphasis) */
+.chip--filled {
+  border-color: var(--color-ink-muted);
+  background: var(--color-ink-muted);
+  color: var(--color-cream);
+}
+
+/* ══════════════════════════════════════════════════
+   HAIRLINE SEPARATOR
+   ══════════════════════════════════════════════════ */
+.hairline {
+  height: 1px;
+  background: var(--color-border);
+  border: none;
+}
+
+.hairline--v {
+  width: 1px;
+  height: 100%;
+  background: var(--color-border);
+}
+
+/* ══════════════════════════════════════════════════
+   GRAIN / NOISE OVERLAY
+   GPU-cheap: single fixed pseudo-element,
+   tiled SVG noise, low opacity, mix-blend-mode.
+   NO filter:blur, NO canvas.
+   ══════════════════════════════════════════════════ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  will-change: auto;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Disable grain overlay on mobile for 60fps performance */
+@media (max-width: 767px) {
+  .grain-overlay {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   NAV — transparent → blur backdrop on scroll
+   ══════════════════════════════════════════════════ */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s var(--ease-out-expo);
+}
+
+.nav-bar--scrolled {
+  background: rgba(18, 18, 18, 0.82);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-wordmark {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ivory);
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  transition: color 0.3s var(--ease-out-expo);
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link--active {
+  color: var(--color-cream);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.35s var(--ease-out-expo);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════════
+   UTILITY HELPERS
+   ══════════════════════════════════════════════════ */
+
+/* Overflow clip for animation reveals */
+.overflow-clip {
+  overflow: hidden;
+}
+
+/* Will-change hints for animated elements */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Asymmetric grid helper */
+.grid-asymmetric {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid-asymmetric {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   REDUCED MOTION FALLBACK
+   ══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+   ══════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone-dark);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-subtle) var(--color-ink);
+}

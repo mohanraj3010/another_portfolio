@@ -1,0 +1,92 @@
+/* ══════════════════════════════════════════════════
+   CUSTOM CURSOR (Desktop Only)
+   Soft trailing lag via transform: translate3d() + rAF
+   Morphs into chip/pill label on interactive elements
+   ══════════════════════════════════════════════════ */
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10001;
+  pointer-events: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, width, height, background-color;
+  transition:
+    width 0.28s var(--ease-out-expo),
+    height 0.28s var(--ease-out-expo),
+    border-radius 0.28s var(--ease-out-expo),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    padding 0.28s var(--ease-out-expo),
+    opacity 0.25s ease;
+  opacity: 0;
+
+  /* Default state: subtle warm dot */
+  width: 9px;
+  height: 9px;
+  background: var(--color-cream);
+  box-shadow: 0 0 12px rgba(232, 224, 214, 0.4);
+}
+
+.custom-cursor--visible {
+  opacity: 1;
+}
+
+/* ── Interactive link hover (subtle scale up) ── */
+.custom-cursor--hover {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1.5px solid var(--color-accent);
+  box-shadow: 0 0 16px var(--color-accent-glow);
+}
+
+/* ── Pill Label Mode (VIEW / OPEN) ── */
+.custom-cursor--pill {
+  width: auto;
+  min-width: 64px;
+  height: 30px;
+  padding: 0 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-cream);
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.custom-cursor--pill-accent {
+  background: var(--color-accent);
+}
+
+/* Label text */
+.custom-cursor__label {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-chip);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.custom-cursor--pill .custom-cursor__label {
+  display: block;
+}
+
+.custom-cursor--pill-accent .custom-cursor__label {
+  color: var(--color-white);
+}
+
+/* ══════════════════════════════════════════════════
+   DISABLED ON TOUCH / MOBILE (max-width: 767px)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 767px), (pointer: coarse), (hover: none) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
